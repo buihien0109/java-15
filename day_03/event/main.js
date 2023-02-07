@@ -6,6 +6,7 @@ const btn2 = document.getElementById("btn-2");
 const btn3 = document.getElementById("btn-3");
 
 const sayHello2 = () => {
+    // debugger
     alert("Hello 2");
 }
 btn2.onclick = sayHello2;
