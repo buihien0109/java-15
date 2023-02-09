@@ -34,6 +34,8 @@ inputEl.addEventListener("keydown", (e) => {
     }
 })
 
+
+
 // 7. Thêm 1 nút “remove”. Chức năng để xóa thẻ <li> cuối cùng của danh sách
 const btnRemove = document.createElement("button");
 btnRemove.innerText = "Remove";

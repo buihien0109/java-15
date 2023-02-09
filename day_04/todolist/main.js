@@ -31,11 +31,11 @@ btnAdd.addEventListener("click", () => {
     inputEl.value = "";
 })
 
-const deleteTodo = id => {};
+const deleteTodo = id => { };
 
-const toggleStatus = id => {};
+const toggleStatus = id => { };
 
-const editTodo = id => {};
+const editTodo = id => { };
 
 const renderTodos = arr => {
     listEl.innerHTML = "";
@@ -49,7 +49,11 @@ const renderTodos = arr => {
     arr.forEach(todo => {
         html += `
             <li>
-                <input type="checkbox" ${todo.status ? "checked" : ""} onclick="toggleStatus(${todo.id})"/>
+                <input 
+                    type="checkbox" 
+                    ${todo.status ? "checked" : ""} 
+                    onclick="toggleStatus(${todo.id})"
+                />
                 <span class=${todo.status ? "active" : ""}>${todo.title}</span>
                 <button onclick="editTodo(${todo.id})">Edit</button>
                 <button onclick="deleteTodo(${todo.id})">Delete</button>
