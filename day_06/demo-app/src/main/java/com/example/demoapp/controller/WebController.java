@@ -1,5 +1,6 @@
 package com.example.demoapp.controller;
 
+import com.example.demoapp.request.CreatePostRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class WebController {
 
     // Tạo mới bài viết : id, title, author
     @PostMapping(value = "/posts", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String createPost() {
-        return 
+    public String createPost(@RequestBody CreatePostRequest request) {
+        return String.format("ID : %d - Title : %s - Author : %s", request.getId(), request.getTitle(), request.getAuthor());
     }
 }
