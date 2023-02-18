@@ -1,5 +1,6 @@
 package com.example.demoapp.service;
 
+import com.example.demoapp.exception.BadRequestException;
 import com.example.demoapp.exception.NotFoundException;
 import com.example.demoapp.model.Todo;
 import com.example.demoapp.request.CreateTodoRequest;

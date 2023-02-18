@@ -6,6 +6,7 @@ import com.example.demoapp.model.Todo;
 import com.example.demoapp.request.CreateTodoRequest;
 import com.example.demoapp.request.UpdateTodoRequest;
 import com.example.demoapp.service.TodoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ public class TodoController {
     public TodoController(TodoService todoService) {
         this.todoService = todoService;
     }
+
     // Inject Bean
     // Field
     // Constructor
@@ -33,18 +35,20 @@ public class TodoController {
 
     @GetMapping("todos/{id}")
     public ResponseEntity<?> getTodoById(@PathVariable Integer id) {
-        try {
-            Todo todo = todoService.getTodoById(id);
-            return ResponseEntity.ok(todo);
-        } catch (NotFoundException e) {
-            ErrorResponse error = new ErrorResponse(HttpStatus.NOT_FOUND, e.getMessage());
-            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-        }
+//        try {
+//            Todo todo = todoService.getTodoById(id);
+//            return ResponseEntity.ok(todo);
+//        } catch (NotFoundException e) {
+//            ErrorResponse error = new ErrorResponse(HttpStatus.NOT_FOUND, e.getMessage());
+//            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+//        }
+        Todo todo = todoService.getTodoById(id);
+        return ResponseEntity.ok(todo);
     }
 
     @PostMapping("todos")
     @ResponseStatus(HttpStatus.CREATED) // 201
-    public Todo createTodo(@RequestBody CreateTodoRequest request) {
+    public Todo createTodo(@Valid @RequestBody CreateTodoRequest request) {
         return todoService.createTodo(request);
     }
 
