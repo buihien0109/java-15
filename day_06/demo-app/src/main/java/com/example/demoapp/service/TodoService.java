@@ -1,5 +1,6 @@
 package com.example.demoapp.service;
 
+import com.example.demoapp.exception.NotFoundException;
 import com.example.demoapp.model.Todo;
 import com.example.demoapp.request.CreateTodoRequest;
 import com.example.demoapp.request.UpdateTodoRequest;
@@ -32,13 +33,16 @@ public class TodoService {
         return todos;
     }
 
+    // error => object : nguyên nhân lỗi
+    // message, path, time, ...
+    // status : mã lỗi
     public Todo getTodoById(Integer id) {
         for (Todo t: todos) {
             if(Objects.equals(t.getId(), id)) {
                 return t;
             }
         }
-        return null;
+        throw new NotFoundException("Not found todo with id = " + id);
     }
 
     public Todo createTodo(CreateTodoRequest request) {
