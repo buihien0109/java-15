@@ -14,6 +14,6 @@ public class CreateTodoRequest {
     @NotEmpty(message = "title không được để trống")
     private String title;
 
-    @NotEmpty(message = "level không được để trống")
-    private String level;
+//    @NotEmpty(message = "level không được để trống")
+//    private String level;
 }

@@ -13,6 +13,6 @@ public class Todo {
     private Integer id;
     private String title;
     private Boolean status;
-    private LocalDateTime createdAt;
-    private String level;
+//    private LocalDateTime createdAt;
+//    private String level;
 }

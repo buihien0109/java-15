@@ -14,5 +14,5 @@ import java.time.LocalDateTime;
 public class UpdateTodoRequest {
     private String title;
     private Boolean status;
-    private String level;
+//    private String level;
 }

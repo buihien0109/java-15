@@ -19,9 +19,12 @@ public class TodoService {
 
     public TodoService() {
         todos =  new ArrayList<>();
-        todos.add(new Todo(1, "Làm bài tập", true, LocalDateTime.now(), "normal"));
-        todos.add(new Todo(2, "Đá bóng", true, LocalDateTime.now(), "medium"));
-        todos.add(new Todo(3, "Đi chơi", false, LocalDateTime.now(), "high"));
+//        todos.add(new Todo(1, "Làm bài tập", true, LocalDateTime.now(), "normal"));
+//        todos.add(new Todo(2, "Đá bóng", true, LocalDateTime.now(), "medium"));
+//        todos.add(new Todo(3, "Đi chơi", false, LocalDateTime.now(), "high"));
+        todos.add(new Todo(1, "Làm bài tập", true));
+        todos.add(new Todo(2, "Đá bóng", true));
+        todos.add(new Todo(3, "Đi chơi", false));
     }
 
     private int generateId() {
@@ -51,8 +54,8 @@ public class TodoService {
                 .id(generateId())
                 .title(request.getTitle())
                 .status(false)
-                .createdAt(LocalDateTime.now())
-                .level(request.getLevel())
+//                .createdAt(LocalDateTime.now())
+//                .level(request.getLevel())
                 .build();
 
         todos.add(todo);
@@ -64,7 +67,7 @@ public class TodoService {
             if(Objects.equals(t.getId(), id)) {
                 t.setTitle(request.getTitle());
                 t.setStatus(request.getStatus());
-                t.setLevel(request.getLevel());
+//                t.setLevel(request.getLevel());
 
                 return t;
             }
