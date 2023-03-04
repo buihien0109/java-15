@@ -1,9 +1,9 @@
-import Content from "./assets/hooks/useState/Content";
+import UserList from "./hooks/useEffect/UserList";
 
 function App() {
     return (
         <>
-            <Content />
+            <UserList />
         </>
     );
 }
