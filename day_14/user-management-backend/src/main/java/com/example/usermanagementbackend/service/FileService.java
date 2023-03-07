@@ -1,6 +1,7 @@
 package com.example.usermanagementbackend.service;
 
 import com.example.usermanagementbackend.exception.BadRequestException;
+import com.example.usermanagementbackend.exception.NotFoundException;
 import com.example.usermanagementbackend.model.response.FileResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -87,6 +89,17 @@ public class FileService {
     }
 
     public byte[] readFile(String id) {
-        return null;
+        Path filePath = rootPath.resolve(id);
+        File file = new File(filePath.toString());
+
+        if(!file.exists()) {
+            throw new NotFoundException("Not found file id = " + id);
+        }
+
+        try {
+            return Files.readAllBytes(filePath);
+        } catch (IOException e) {
+            throw new RuntimeException("Lỗi trong quá trình đọc file");
+        }
     }
 }
