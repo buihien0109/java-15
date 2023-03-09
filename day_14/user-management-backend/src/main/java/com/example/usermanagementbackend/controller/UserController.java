@@ -5,6 +5,7 @@ import com.example.usermanagementbackend.model.request.CreateUserRequest;
 import com.example.usermanagementbackend.model.request.UpdateAvatarRequest;
 import com.example.usermanagementbackend.model.request.UpdatePasswordRequest;
 import com.example.usermanagementbackend.model.request.UpdateUserRequest;
+import com.example.usermanagementbackend.model.response.FileResponse;
 import com.example.usermanagementbackend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -81,9 +82,9 @@ public class UserController {
 
     // Thay đổi avatar của user
     @PutMapping("/users/{id}/update-avatar")
-    public ResponseEntity<?> updateAvatar(@PathVariable int id, @RequestBody UpdateAvatarRequest request) {
-        userService.updateAvatar(id, request);
-        return ResponseEntity.noContent().build(); // 204
+    public ResponseEntity<?> updateAvatar(@ModelAttribute("file") MultipartFile file, @PathVariable Integer id) {
+        FileResponse fileResponse = userService.updateAvatar(id, file);
+        return ResponseEntity.ok(fileResponse);
     }
 
 }

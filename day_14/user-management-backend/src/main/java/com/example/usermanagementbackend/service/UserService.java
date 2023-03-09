@@ -9,9 +9,12 @@ import com.example.usermanagementbackend.model.request.CreateUserRequest;
 import com.example.usermanagementbackend.model.request.UpdateAvatarRequest;
 import com.example.usermanagementbackend.model.request.UpdatePasswordRequest;
 import com.example.usermanagementbackend.model.request.UpdateUserRequest;
+import com.example.usermanagementbackend.model.response.FileResponse;
 import com.example.usermanagementbackend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Random;
@@ -21,6 +24,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final FileService fileService;
 
     // Lấy danh sách user ở dạng DTO
     public List<UserDto> getUsers() {
@@ -128,11 +132,17 @@ public class UserService {
         return newPassword;
     }
 
-    public void updateAvatar(int id, UpdateAvatarRequest request) {
+    public FileResponse updateAvatar(Integer id, MultipartFile file) {
         User user = userRepository.findById(id).orElseThrow(() -> {
             throw new NotFoundException("Not found user with id = " + id);
         });
 
-        user.setAvatar(request.getAvatar());
+        // Upload file
+        FileResponse fileResponse = fileService.uploadFile(file);
+
+        // Set lại avatar của user
+        user.setAvatar(fileResponse.getUrl());
+
+       return fileResponse;
     }
 }
