@@ -2,6 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+// Một số thư viện để validate form:
+// 1. React-hook-form
+// 2. Formik
+// 3. Redux-form
+// ...
+
 const ENDPOINT = "http://localhost:8080/api/v1/users";
 function UserDetail() {
     // Lấy ra userId trên url
@@ -45,7 +51,7 @@ function UserDetail() {
         try {
             const rs = await axios.put(`${ENDPOINT}/${userId}/update-avatar`, formData, {
                 headers : {
-                    "Content-Type" : "form-data"
+                    "Content-Type" : "multipart/form-data"
                 }
             })
             console.log(rs);
@@ -124,8 +130,9 @@ function UserDetail() {
                             <div className="avatar-preview mb-3 rounded">
                                 <img
                                     src={
-                                        `http://localhost:8080${user?.avatar}` ??
-                                        "https://via.placeholder.com/200"
+                                        user?.avatar
+                                        ? `http://localhost:8080${user?.avatar}`
+                                        : "https://via.placeholder.com/200"
                                     }
                                     alt="avatar"
                                     id="avatar-preview"
